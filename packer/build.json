@@ -1,0 +1,27 @@
+{
+  "variables": {
+    "aws_access_key": "AKIA2WLMPEYJSIBILDML",
+    "aws_secret_key": "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"
+  },
+  "builders": [{
+    "type": "amazon-ebs",
+    "access_key": "{{user `aws_access_key`}}",
+    "secret_key": "{{user `aws_secret_key`}}",
+    "region": "us-east-1",
+    "source_ami": "ami-0b0af3577fe5e3532",
+    "instance_type": "t2.micro",
+    "ssh_username": "ec2-user",
+    "ami_name": "nginx_api_cep_packer",
+    "ami_description": "Provisiona API CEP",
+    "associate_public_ip_address": true,
+    "tags": {
+      "Name": "nginx_api_cep_packer"
+    }
+  }],
+  "provisioners": [
+    {
+      "type": "ansible",
+      "playbook_file": "./ansible/playbook.yml"
+    }
+  ]
+}
